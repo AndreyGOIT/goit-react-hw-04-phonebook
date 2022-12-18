@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import styles from './Form.module.css';
+import { nanoid } from 'nanoid';
 // import { within } from '@testing-library/react';
+
+const nameInputId = nanoid(); //=> "V1StGXR8_Z5jdHi6B-myT"
+const numberInputId = nanoid();
 
 export default function Form() {
   const [name, setName] = useState(
@@ -21,10 +25,17 @@ export default function Form() {
   useEffect(() => {
     window.localStorage.setItem('number', JSON.stringify(number));
   }, [number]);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(name, number);
+    this.props.onSubmit(name);
+  };
+
   return (
     <section className={styles.section}>
-      <form className={styles.phoneBookWindow} onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameInputId}>
+      <form className={styles.phoneBookWindow} onSubmit={handleSubmit}>
+        <label htmlFor={nameInputId}>
           Name<br></br>
           <input
             type="text"
@@ -36,7 +47,7 @@ export default function Form() {
             onChange={handleNameChange}
           />
         </label>
-        <label htmlFor={this.numberInputId}>
+        <label htmlFor={numberInputId}>
           Number<br></br>
           <input
             type="tel"
