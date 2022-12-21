@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 const nameInputId = nanoid(); //=> "V1StGXR8_Z5jdHi6B-myT"
 const numberInputId = nanoid();
 
-export default function Form() {
+export default function Form({ onSubmit }) {
   const [name, setName] = useState(
     JSON.parse(window.localStorage.getItem('name')) ?? ''
   );
@@ -29,7 +29,9 @@ export default function Form() {
   const handleSubmit = event => {
     event.preventDefault();
     console.log(name, number);
-    this.props.onSubmit(name, number);
+    onSubmit({ name, number });
+    setName('');
+    setNumber('');
   };
 
   return (

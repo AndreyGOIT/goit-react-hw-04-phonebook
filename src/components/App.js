@@ -2,6 +2,7 @@
 import { ContactsList } from './ContactsList/ContactsList';
 import Form from './Form/Form';
 import Filter from './Filter/Filter';
+import { nanoid } from 'nanoid';
 
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -22,36 +23,33 @@ export default function App() {
     window.localStorage.setItem('filter', JSON.stringify(filter));
   }, [filter]);
 
-  const formSubmitHandler = data => {
+  const formSubmitHandler = ({ name, number }) => {
+    console.log(name, number);
     const isExist = contacts.find(contact => {
-      return data.name === contact.name;
+      return name === contact.name;
     });
     if (isExist) {
-      return alert(`${data.name} is already in contacts.`);
+      return alert(`${name} is already in contacts.`);
     }
-    setContacts(data);
+    const id = nanoid();
+    setContacts([{ name, number, id }]);
   };
 
   const changeFilter = e => {
     setFilter(e.target.value);
     console.log(filter);
   };
-  // const formSubmitHandler = data => {
-  //   const isExist = contacts.find(contact => {
-  //     return data.name === contact.name;
+  // const updateContacts = () => {
+  //   const filterWord = filter.toLowerCase().trim();
+  //   return contacts.filter(({ name }) => {
+  //     return name.toLowerCase().includes(filterWord);
   //   });
-  //   if (isExist) {
-  //     return alert(`${data.name} is already in contacts.`);
-  //   }
-  //   this.setState(prevState => ({
-  //     contacts: [...prevState.contacts, data],
-  //   }));
   // };
 
   const contactsQuantity = contacts.length;
   console.log(contactsQuantity);
   // const { filter } = this.state;
-  // const visibleContacts = this.updateContacts();
+  // const visibleContacts = updateContacts();
   return (
     <>
       <h1
