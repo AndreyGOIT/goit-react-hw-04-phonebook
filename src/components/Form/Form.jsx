@@ -29,7 +29,7 @@ export default function Form() {
   const handleSubmit = event => {
     event.preventDefault();
     console.log(name, number);
-    this.props.onSubmit(name);
+    this.props.onSubmit(name, number);
   };
 
   return (
