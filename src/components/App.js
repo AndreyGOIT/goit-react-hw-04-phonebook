@@ -39,12 +39,12 @@ export default function App() {
     setFilter(e.target.value);
     console.log(filter);
   };
-  // const updateContacts = () => {
-  //   const filterWord = filter.toLowerCase().trim();
-  //   return contacts.filter(({ name }) => {
-  //     return name.toLowerCase().includes(filterWord);
-  //   });
-  // };
+  const updateContacts = () => {
+    const filterWord = filter.toLowerCase().trim();
+    return contacts.filter(({ name }) => {
+      return name.toLowerCase().includes(filterWord);
+    });
+  };
   const deleteContact = deleteId => {
     setContacts(contacts.filter(({ id }) => id !== deleteId));
   };
@@ -52,7 +52,7 @@ export default function App() {
   const contactsQuantity = contacts.length;
   console.log(contactsQuantity);
   // const { filter } = this.state;
-  // const visibleContacts = updateContacts();
+  const visibleContacts = updateContacts;
   return (
     <>
       <h1
@@ -72,7 +72,10 @@ export default function App() {
       </h2>
       <Filter value={filter} onChange={changeFilter} />
       {contactsQuantity > 0 ? (
-        <ContactsList contacts={contacts} deleteContact={deleteContact} />
+        <ContactsList
+          contacts={visibleContacts}
+          deleteContact={deleteContact}
+        />
       ) : (
         <span
           style={{
