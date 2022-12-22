@@ -32,7 +32,7 @@ export default function App() {
       return alert(`${name} is already in contacts.`);
     }
     const id = nanoid();
-    setContacts([{ name, number, id }]);
+    setContacts([...contacts, { name, number, id }]);
   };
 
   const changeFilter = e => {
@@ -45,6 +45,9 @@ export default function App() {
   //     return name.toLowerCase().includes(filterWord);
   //   });
   // };
+  const deleteContact = deleteId => {
+    setContacts(contacts.filter(({ id }) => id !== deleteId));
+  };
 
   const contactsQuantity = contacts.length;
   console.log(contactsQuantity);
@@ -69,10 +72,7 @@ export default function App() {
       </h2>
       <Filter value={filter} onChange={changeFilter} />
       {contactsQuantity > 0 ? (
-        <ContactsList
-          contacts={contacts}
-          // deleteContact={this.deleteContact}
-        />
+        <ContactsList contacts={contacts} deleteContact={deleteContact} />
       ) : (
         <span
           style={{
