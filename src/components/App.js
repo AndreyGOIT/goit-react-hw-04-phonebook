@@ -52,7 +52,7 @@ export default function App() {
   const contactsQuantity = contacts.length;
   console.log(contactsQuantity);
   // const { filter } = this.state;
-  const visibleContacts = updateContacts;
+  const visibleContacts = updateContacts();
   return (
     <>
       <h1
