@@ -11,17 +11,11 @@ export default function App() {
   const [contacts, setContacts] = useState(
     JSON.parse(window.localStorage.getItem('contacts')) ?? []
   );
-  const [filter, setFilter] = useState(
-    JSON.parse(window.localStorage.getItem('filter')) ?? ''
-  );
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
-
-  useEffect(() => {
-    window.localStorage.setItem('filter', JSON.stringify(filter));
-  }, [filter]);
 
   const formSubmitHandler = ({ name, number }) => {
     console.log(name, number);
